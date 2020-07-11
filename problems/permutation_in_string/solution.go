@@ -1,25 +1,28 @@
-func checkInclusion(s1 string, s2 string) bool {
-	var x []int
-	l := len(s1)
-	for i := 0; i<=len(s2) -l;i++  {
-		if isAnagram(s2[i:i+l],s1){
-			x = append(x,i)
-		}
-	}
-	return len(x) > 0
-}
-
-func isAnagram(s string, t string) bool {
-	if len(s) != len(t){
+func checkInclusion(s1, s2 string) bool {
+	if len(s1) > len(s2) {
 		return false
 	}
-	x := make([]int,26)
-	for i := 0; i < len(s); i++ {
-		x[s[i]-97]++
-		x[t[i]-97]--
+	for i := 0; i < (len(s2)-len(s1))+1; i++ {
+		if ArePermutations(s1, s2[i:i+len(s1)]) {
+			return true
+		}
 	}
-	for _, i2 := range x {
-		if i2!=0{
+	return false
+}
+
+
+
+func ArePermutations(s1, s2 string)bool  {
+	if len(s1) != len(s2){
+		return false
+	}
+	m := make(map[uint8]int)
+	for i:= 0;i<len(s1);i++ {
+			m[s1[i]-97]++
+			m[s2[i]-97]--
+	}
+	for _,v := range m{
+		if v > 0{
 			return false
 		}
 	}
