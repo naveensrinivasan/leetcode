@@ -1,19 +1,26 @@
 func isValid(s string) bool {
-	var l []string
+	box := []string{}
 	for _, v := range s {
-		switch v {
-		case '{', '(','[':
-			l = append(l, string(v))
-		case '}', ')', ']':
-			if len(l) == 0 ||
-				(string(v) == "}" && l[len(l)-1] != "{" ||
-					string(v) == "]" && l[len(l)-1] != "[" ||
-					string(v) == ")" && l[len(l)-1] != "(") {
+		switch string(v) {
+		case "{", "[", "(":
+			box = append(box, string(v))
+		case "}":
+			if len(box) == 0 || box[len(box)-1] != "{" {
 				return false
 			}
-			l = l[:len(l) -1]
-
+			box = box[:len(box)-1]
+		case "]":
+			if len(box) == 0 || box[len(box)-1] != "[" {
+				return false
+			}
+			box = box[:len(box)-1]
+		case ")":
+			if len(box) == 0 || box[len(box)-1] != "(" {
+				return false
+			}
+			box = box[:len(box)-1]
 		}
+
 	}
-	return len(l) == 0
+	return len(box) == 0
 }
