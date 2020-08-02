@@ -1,15 +1,15 @@
 func threeSum(nums []int) [][]int {
-	var results [][]int
+	var result [][]int
 	sort.Ints(nums)
 	for i := 0; i < len(nums)-2; i++ {
 		if i > 0 && nums[i] == nums[i-1] {
-			continue //To prevent the repeat
+			continue // to avoid duplicate
 		}
-		target, left, right := -nums[i], i+1, len(nums)-1
+		left, right := i+1, len(nums)-1
 		for left < right {
-			sum := nums[left] + nums[right]
-			if sum == target {
-				results = append(results, []int{nums[i], nums[left], nums[right]})
+			sum := nums[left] + nums[right] + nums[i]
+			if sum == 0 {
+				result = append(result, []int{nums[i], nums[left], nums[right]})
 				left++
 				right--
 				for left < right && nums[left] == nums[left-1] {
@@ -18,12 +18,13 @@ func threeSum(nums []int) [][]int {
 				for left < right && nums[right] == nums[right+1] {
 					right--
 				}
-			} else if sum > target {
+
+			} else if sum > 0 {
 				right--
-			} else if sum < target {
+			} else if sum < 0 {
 				left++
 			}
 		}
 	}
-	return results
+	return result
 }
