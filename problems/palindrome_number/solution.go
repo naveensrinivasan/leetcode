@@ -1,18 +1,12 @@
 func isPalindrome(x int) bool {
-    if x < 0  {
-		return false
-	}
-	if x < 10 {
-		return true
-	}
-	y := x
 	pop := 0
 	reversed := 0
-	for x != 0 {
-		pop = x % 10
-		// division result
-		x /= 10
-		reversed = (reversed * 10) + pop
+	y := x
+	for y != 0 {
+		pop = y % 10
+		reversed = reversed*10 + pop
+		y /= 10
 	}
-	return reversed == y
+	fmt.Println(reversed, x)
+	return x == int(math.Abs(float64(reversed)))
 }
