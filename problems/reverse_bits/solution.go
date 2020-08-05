@@ -1,8 +1,12 @@
 func reverseBits(num uint32) uint32 {
-	result := uint32(0)
+	output := uint32(0)
 	for i := 0; i < 32; i++ {
-		result = result<<1 + num&1
-		num = num >> 1
+		/*
+		  add the last digit from num to the output by num & 1
+		  Left shift output for the next digit
+		*/
+		output = output<<1 + num&1
+		num >>= 1
 	}
-	return result
+	return output
 }
