@@ -1,12 +1,12 @@
 func transpose(A [][]int) [][]int {
-	result := [][]int{}
-	for col := 0; col < len(A[0]); col++ {
-		mrow := []int{}
-		for row := 0; row < len(A); row++ {
-			mrow = append(mrow, A[row][col])
+	result := make([][]int, len(A[0]))
+	for i, _ := range result {
+		result[i] = make([]int, len(A))
+	}
+	for row := 0; row < len(A); row++ {
+		for col := 0; col < len(A[0]); col++ {
+			result[col][row] = A[row][col]
 		}
-		result = append(result, mrow)
 	}
 	return result
-
 }
