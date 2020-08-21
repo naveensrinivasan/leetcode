@@ -1,15 +1,17 @@
 // type ListNode struct {
 // 	Val  int
 // 	Next *ListNode
-// }
+//}
 
 func hasCycle(head *ListNode) bool {
-	first, second := head, head
-	for second != nil && second.Next != nil {
-		first = first.Next
-		second = second.Next.Next
-
-		if first == second {
+	if head == nil {
+		return false
+	}
+	slow, fast := head, head
+	for fast.Next != nil && fast.Next.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow.Val == fast.Val {
 			return true
 		}
 	}
