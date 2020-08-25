@@ -14,6 +14,7 @@ func removeElements(head *ListNode, val int) *ListNode {
 		if cur.Next.Val == val {
 			cur.Next = cur.Next.Next
 		} else {
+
 			cur = cur.Next
 		}
 	}
