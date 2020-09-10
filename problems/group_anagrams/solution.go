@@ -1,27 +1,19 @@
-import (
-"sort"
-	"strings"
-)
-
 func groupAnagrams(strs []string) [][]string {
-    x := make(map[string][]string)
-	var y [][]string
-	for _, i2 := range strs {
-		s := sortString(i2)
-		if values, ok := x[s]; ok {
-			x[s] = append(values, i2)
-			continue
+	words := make(map[string][]string)
+	var result [][]string
+	for _, s := range strs {
+		count := make([]int, 26)
+		for _, c := range s {
+			count[c-'a']++
 		}
-		x[s] = []string{i2}
+		sb := strings.Builder{}
+		for _, k := range count {
+			sb.WriteString(fmt.Sprintf("%s#", strconv.Itoa(k)))
+		}
+		words[sb.String()] = append(words[sb.String()], s)
 	}
-	for _, i2 := range x {
-		y = append(y, i2)
+	for _, v := range words {
+		result = append(result, v)
 	}
-	return y
-}
-
-func sortString(s string)string{
-	s1 := strings.Split(s,"")
-	sort.Strings(s1)
-	return strings.Join(s1,"")
+	return result
 }
