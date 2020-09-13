@@ -1,22 +1,29 @@
-func wordPattern(pattern string, str string) bool {
-	m := make(map[int32]string)
-	words := strings.Split(str, " ")
-    if len(pattern) != len(words) {
+func wordPattern(pattern string, s string) bool {
+	words := strings.Split(s, " ")
+	chars := strings.Split(pattern, "")
+
+	if len(words) != len(chars) {
 		return false
 	}
-	for i, i2 := range pattern {
-		if value, ok := m[i2]; ok {
+
+	h := make(map[string]string)
+
+	for i, c := range chars {
+		if value, ok := h[c]; !ok {
+			for _, v := range h {
+				if v == words[i] {
+					return false
+				}
+			}
+			h[c] = words[i]
+			continue
+		} else {
 			if value != words[i] {
 				return false
 			}
-			continue
 		}
-		for _, i4 := range m {
-			if i4 == words[i] {
-				return false
-			}
-		}
-		m[i2] = words[i]
 	}
+
 	return true
+
 }
