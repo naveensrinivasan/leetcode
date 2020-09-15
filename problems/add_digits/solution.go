@@ -1,9 +1,13 @@
 func addDigits(num int) int {
-	if num == 0 {
-		return 0
+	x := num
+	sum := 0
+	for x != 0 {
+		sum = x%10 + sum
+		x /= 10
 	}
-	if num%9 == 0 {
-		return 9
+	if sum > 9 {
+		sum = addDigits(sum)
 	}
-	return num % 9
+
+	return sum
 }
