@@ -8,6 +8,5 @@ func isPowerOfTwo(n int) bool {
 		}
 		n /= 2
 	}
-
 	return true
 }
