@@ -1,19 +1,20 @@
 func isPalindrome(s string) bool {
-    i:= 0
-	j:= len(s) -1
+
+	left, right := 0, len(s)-1
+
 	var IsLetter = regexp.MustCompile(`^[a-zA-Z0-9]*$`).MatchString
-	for i<j{
-		for i <j && !IsLetter(string(s[i])){
-			i++
+	for left <= right {
+		for left < right && !IsLetter(string(s[left])) {
+			left++
 		}
-		for i< j && !IsLetter(string(s[j])){
-			j--
+		for left < right && !IsLetter(string(s[right])) {
+			right--
 		}
-		if strings.ToLower(string(s[i])) != strings.ToLower( string(s[j])){
+		if strings.ToLower(string(s[left])) != strings.ToLower(string(s[right])) {
 			return false
 		}
-		i++
-		j--
+		left++
+		right--
 	}
 	return true
 }
