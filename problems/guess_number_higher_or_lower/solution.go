@@ -14,7 +14,7 @@
 // 1+10 /2 = 5
 
 func guessNumber(n int) int {
-	low, high := 1, n
+	low, high := 0, n
 	for low <= high {
 		mid := (low + high) / 2
 		switch guess(mid) {
