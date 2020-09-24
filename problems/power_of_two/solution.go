@@ -1,17 +1,18 @@
 func isPowerOfTwo(n int) bool {
+	result := 0
 	if n == 0 {
 		return false
 	}
-	return twosPower(n)
-}
-func twosPower(n int) bool {
+	for n != 0 {
+		result += (n & 1)
 
-	if n != 1 {
-		if n%2 != 0 {
+		if result > 1 {
 			return false
 		}
-		n /= 2
-		return twosPower(n)
+		fmt.Println(result, n)
+		n = n >> 1
+
 	}
+	fmt.Println(result)
 	return true
 }
