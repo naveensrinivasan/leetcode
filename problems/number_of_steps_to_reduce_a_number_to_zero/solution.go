@@ -1,13 +1,16 @@
-func numberOfSteps (num int) int {
-    result := num
-    counter:= 0
-    for result > 0{
-        counter ++
-        if result % 2 == 0{
-            result = result /2
-            continue
-        }
-        result--
-    }
-    return counter
+func numberOfSteps(num int) int {
+	if num <= 1 {
+		return num
+	}
+	result := 0
+	for num > 0 {
+		if num&1 == 1 {
+			num -= 1
+		} else {
+			num >>= 1
+		}
+		result++
+	}
+	return result
+
 }
