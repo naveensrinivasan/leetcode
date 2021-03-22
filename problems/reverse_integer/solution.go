@@ -1,17 +1,24 @@
-
-
 func reverse(x int) int {
-    	pop := 0
-	reversed := 0
-	for x != 0 {
-		pop = x % 10
-		// division result
-		x /= 10
-		reversed = (reversed * 10) + pop
-	}
-    if math.MaxInt32 < reversed || reversed < math.MinInt32 {
+    y := int(math.Abs(float64(x)))
+    result := 0
+    for y > 0 {
+        result = result * 10
+        result += y %10
+        y /= 10
+    
+       
+    }
+    if result < -2147483648 {
 		return 0
 	}
-	return reversed
-
+	
+	if result > 2147483647 {
+		return 0
+	}
+    if x < 0{         
+     return -1*result   
+    }
+ 
+    return result
+    
 }
