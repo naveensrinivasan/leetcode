@@ -1,15 +1,15 @@
 
 
+// @lc code=start
 func twoSum(nums []int, target int) []int {
-    m := make(map[int]int)
-    for i , value := range nums{
-        n := target - value
-        if pos,ok := m[n];ok{
-            return[]int {i,pos}
-        }
-        m[value] = i
-       
-    }
-    
-    return nil
+	m := make(map[int]int)
+	//[2,7,11,15]
+	for i, item := range nums {
+		t := target - item
+		if indice, ok := m[t]; ok {
+			return []int{indice, i}
+		}
+		m[item] = i
+	}
+	return []int{0, 0}
 }
