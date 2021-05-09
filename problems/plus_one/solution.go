@@ -1,24 +1,36 @@
 func plusOne(digits []int) []int {
-	carry := 0
-	first := false
-	for i := len(digits) - 1; i >= 0; i-- {
-		sum := 0
-		if !first {
-			sum = digits[i] + 1
-			first = true
-		} else {
-			sum += digits[i] + carry
-		}
-		if sum > 9 {
-			carry = 1
-			digits[i] = sum % 10
-		} else {
-			carry = 0
-			digits[i] = sum
-		}
-	}
-	if carry > 0 {
-		digits = append([]int{1}, digits...)
-	}
-	return digits
+    result := []int{}
+    carry := 0
+    doIncrement := true
+    isFirstTime := true
+    for i:=len(digits)-1;i>=0;i--{
+        x:= 0
+        if doIncrement{
+            if isFirstTime {
+                x = digits[i] +1 + carry    
+                isFirstTime = false
+            }else{
+                x = digits[i] + carry
+            }
+            
+            doIncrement = false
+            if x > 9{
+                carry = 1
+                doIncrement = true
+                result = append([]int{x%10}, result...)    
+            }else{
+                carry = 0
+                result = append([]int{x}, result...)    
+            }
+            
+        }else{
+            result = append([]int{digits[i]}, result...)
+        }
+        
+        
+    }
+    if carry == 1{
+        result = append([]int{1}, result...)    
+    }
+    return result
 }
