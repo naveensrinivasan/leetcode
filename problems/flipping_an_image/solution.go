@@ -1,9 +1,6 @@
 func flipAndInvertImage(image [][]int) [][]int {
     for _,j := range image{
-        l,r := 0,len(j)-1
-        
-    
-      
+        l,r := 0,len(j)-1   
         for l<r{
             j[l],j[r] = j[r],j[l]
             if j[l] == 0{
@@ -19,9 +16,9 @@ func flipAndInvertImage(image [][]int) [][]int {
              l++
              r--
         }
-        mid := (len(j)/2) 
-        fmt.Println(mid)
+      
         if len(j)%2 == 1{
+              mid := (len(j)/2) 
             if j[mid] == 0{
                 j[mid] = 1
             }else{
