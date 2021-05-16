@@ -11,10 +11,8 @@ func shortestToChar(s string, c byte) []int {
         for _,item := range occ{
             r := abs(i-item)
             if r < min{
-                min = r
-                
+                min = r   
             }
-           
         }
         result = append(result,min)
     }
