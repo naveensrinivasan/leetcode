@@ -23,8 +23,6 @@ func backspaceCompare(s string, t string) bool {
             right++
         }
     }
-     
-    fmt.Println(s,t)
     
     return strings.Trim(s,"#")==strings.Trim(t,"#")
 }
