@@ -9,6 +9,5 @@ func numUniqueEmails(emails []string) int {
             m[email] = email
         }
     }
-    fmt.Println(m)
     return len(m)
 }
