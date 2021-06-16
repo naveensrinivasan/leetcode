@@ -13,9 +13,7 @@ func numEquivDominoPairs(dominoes [][]int) int {
         }
     }
     for _,v := range m{
-        if v > 0{
-            result+= (v*(v+1))/2
-        }
+        result+= (v*(v+1))/2
     }
     return result
 }
