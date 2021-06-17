@@ -4,9 +4,9 @@ func buildArray(target []int, n int) []string {
     for i:=1;i<max;i++{
         if target[0] == i{
             result ,target= append(result,"Push"),target[1:]
-            continue
+        }else{
+            result = append(result,[]string{"Push","Pop"}...)
         }
-        result = append(result,[]string{"Push","Pop"}...)
     }
     return result
 }
