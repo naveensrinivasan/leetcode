@@ -1,5 +1,6 @@
 func searchInsert(nums []int, target int) int {
     left,right,ans := 1,len(nums),0
+    
     if target > nums[len(nums)-1]{
         return len(nums)
     }
