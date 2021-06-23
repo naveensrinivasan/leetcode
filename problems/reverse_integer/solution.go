@@ -10,12 +10,9 @@ func reverse(x int) int {
     }
     if result < -2147483648 {
 		return 0
-	}
-	
-	if result > 2147483647 {
+	}else if result > 2147483647 {
 		return 0
-	}
-    if x < 0{         
+	} else if x < 0{         
      return -1*result   
     }
  
