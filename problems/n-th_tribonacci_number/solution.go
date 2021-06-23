@@ -1,10 +1,13 @@
 func tribonacci(n int) int {
-    m := make(map[int]int)
-    m[0] = 0
-    m[1] = 1
-    m[2] = 1
-    for i:=3;i<=n;i++{
-        m[i] = m[i-2] + m[i-1] + m[i-3]       
+    a,b,c,d := 0,1,1,0
+    if n == 1 || n== 2{
+        return 1
+    }else if n == 0{
+        return 0
     }
-    return m[n]
+    for i:=3;i<=n;i++{
+        d = a + b + c
+        a,b,c = b,c,d
+    }
+    return d
 }
