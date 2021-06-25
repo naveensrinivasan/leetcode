@@ -1,18 +1,25 @@
-// type ListNode struct {
-// 	Val  int
-// 	Next *ListNode
-// }
-
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func hasCycle(head *ListNode) bool {
-	if head == nil {
-		return false
-	}
-	slow, fast := head, head
-	for fast != nil && fast.Next != nil {
-		slow, fast = slow.Next, fast.Next.Next
-		if slow == fast {
-			return true
-		}
-	}
-	return false
+    if head == nil || head.Next == nil{
+        return false
+    }
+    
+    t,h := head.Next , head.Next.Next
+    for t!=nil && h!=nil{
+        if t == h{
+            return true
+        }
+        t = t.Next
+        if h.Next == nil{
+            break
+        }
+        h = h.Next.Next
+    } 
+    return false
 }
