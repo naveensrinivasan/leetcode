@@ -12,7 +12,6 @@ func swapPairs(head *ListNode) *ListNode {
     for cur != nil{
         if prev != nil && counter%2==1{
             prev.Val , cur.Val = cur.Val, prev.Val
-            fmt.Println(prev,cur)
         }
         prev = cur
         cur = cur.Next
