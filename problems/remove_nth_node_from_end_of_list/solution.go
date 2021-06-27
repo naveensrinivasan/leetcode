@@ -11,12 +11,16 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
         return head
     }
     
-    for cur!= nil{
-        counter++
-        cur = cur.Next
+    for cur!= nil && cur.Next != nil{
+        counter+=2
+        cur = cur.Next.Next
     }
     if counter == 1{
         return nil
+    }
+    
+    if cur != nil{
+        counter++
     }
     
     pos := counter -n
