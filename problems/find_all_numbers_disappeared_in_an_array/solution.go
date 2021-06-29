@@ -9,7 +9,5 @@ func findDisappearedNumbers(nums []int) []int {
             result = append(result,i)
         }
     }
-    
-    
     return result
 }
