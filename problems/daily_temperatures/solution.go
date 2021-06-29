@@ -6,9 +6,9 @@ func dailyTemperatures(temperatures []int) []int {
     s:=[]F{}
     for i:=len(temperatures)-1;i>=0;i--{
         v := 0
-        for len(s) > 0 && temperatures[i] >= s[len(s)-1].K{
-            s = s[:len(s)-1]
-        }
+        counter := 0
+        for j:=len(s)-1;j >= 0 && temperatures[i] >= s[j].K;j,counter = j-1,counter+1{}
+        s = s[:len(s)-counter]
         if len(s) > 0{
             v = (s[len(s)-1].I) - i
         }
