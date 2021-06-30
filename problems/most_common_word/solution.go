@@ -1,28 +1,33 @@
 func mostCommonWord(paragraph string, banned []string) string {
-	bannedTable := make(map[string]string, len(banned))
-	wordCountTable := make(map[string]int)
-	regualrExpression := regexp.MustCompile("[^a-zA-Z ]")
-	para := regualrExpression.ReplaceAllString(strings.ToLower(paragraph), " ")
-	greatest := 0
-	commonWord := ""
+    m := make(map[string]int)
+    b := make(map[string]string)
+    
+    for _,word := range banned{
+        b[word] = word
+    }
+    
+    for _, word := range strings.FieldsFunc(paragraph,Split){
+        word = strings.ToLower(word)
+        reg, _ := regexp.Compile("[^a-z]+")
+        word := reg.ReplaceAllString(word, "")
+        if _,ok:= b[word];!ok{
+            m[word]++
+        }
+    }
+    
+    
+    key,val := "",0
+    for k,v := range m{
+        if v > val{
+            val = v
+            key = k
+        }
+    }
+    
+    return key
+    
+}
 
-	for _, word := range banned {
-		bannedTable[word] = word
-	}
-
-	for _, word := range strings.Split(para, " ") {
-		word = strings.TrimSpace(word)
-		if word == "" {
-			continue
-		}
-		if _, ok := bannedTable[word]; !ok {
-			wordCountTable[word] += 1
-			if wordCountTable[word] > greatest {
-				greatest = wordCountTable[word]
-				commonWord = word
-			}
-		}
-	}
-
-	return commonWord
+func Split(r rune) bool {
+    return r == ' ' || r == ','
 }
