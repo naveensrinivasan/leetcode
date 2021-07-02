@@ -3,7 +3,7 @@ func relativeSortArray(arr1 []int, arr2 []int) []int {
         K,V int
     }
     result := make([]int,len(arr1))
-    l := []F{}
+    l := make([]F,len(arr1))
     m := make(map[int]int)
     sort.Ints(arr1)
     counter := len(arr1)+1
@@ -12,11 +12,11 @@ func relativeSortArray(arr1 []int, arr2 []int) []int {
         m[arr2[i]]=i
     }
     
-    for _, i := range arr1{
+    for j, i := range arr1{
         if v,ok := m[i];ok{
-            l = append(l,F{v,i})
+            l[j] = F{v,i}
         }else{
-            l = append(l,F{counter,i})
+            l[j] = F{counter,i}
             counter++
         }
     }
