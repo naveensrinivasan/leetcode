@@ -1,14 +1,15 @@
 func sortArrayByParityII(nums []int) []int {
-    result := make([]int,len(nums))
-    even,odd:= 0,1
-    for i:=0;i<len(nums);i++{
-        if nums[i]%2==0{
-            result[even] = nums[i]
-            even += 2
-        }else{
-            result[odd] = nums[i]
-            odd+=2
+    i,j,l:=0,1,len(nums)
+    for i<l && j<l{
+        for i<l && nums[i]%2==0{
+           i+=2 
+        }
+        for j<l && nums[j]%2==1{
+           j+=2 
+        }
+        if (i<l && j <l){
+         nums[i], nums[j] = nums[j],nums[i]   
         }
     }
-    return result
+    return nums
 }
