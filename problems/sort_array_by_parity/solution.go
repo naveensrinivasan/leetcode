@@ -1,11 +1,17 @@
 func sortArrayByParity(A []int) []int {
-    result := []int{}
-    for i:=0;i<len(A);i++{
-        if A[i] %2 != 0{
-            result = append(result,A[i])
+    l,r :=0,len(A)-1
+    for l<r{
+        if A[l]%2==0{
+            l++
         }else{
-            result = append([]int{A[i]},result...)
-        }
+            if A[r]%2==1{
+                r--
+            }else{
+                A[l],A[r] = A[r],A[l]
+                l++
+                r--
+            } 
+        }  
     }
-    return result
+    return A
 }
