@@ -7,22 +7,15 @@
  * }
  */
 func inorderTraversal(root *TreeNode) []int {
-    if root == nil{
-        return []int{}
+    g := []int{}
+    helper(root,&g)
+    return g
+}
+func helper(root *TreeNode,result *[]int){
+    if root== nil{
+        return
     }
-    s := []*TreeNode{}
-    nums := []int{}
-    node := root
-    for node != nil || len(s) > 0{
-        if node != nil{
-            s = append(s,node)
-            node = node.Left
-        }else{
-            node = s[len(s) - 1]
-            s = s[:len(s) - 1]
-            nums = append(nums,node.Val)
-            node = node.Right
-        }
-    }
-    return nums
+    helper(root.Right,result)
+    *result = append([]int{root.Val},*result...)
+    helper(root.Left,result)
 }
