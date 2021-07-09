@@ -7,25 +7,18 @@
  * }
  */
 func rangeSumBST(root *TreeNode, low int, high int) int {
-    s := []*TreeNode{}
-    s = append(s,root)
     result:= 0
-    
-    for len(s) != 0{
-        node := s[0]
-        s = s[1:]
-        
-        if node.Val >= low && node.Val<=high{
-            result+=node.Val
-        } 
-        
-        if node.Left != nil{
-            s = append(s,node.Left)
-        }
-        
-        if node.Right != nil{
-            s = append(s,node.Right)
-        }
-    }
+    helper(root,low,high,&result)
     return result
+}
+
+func helper(root *TreeNode,low,high int, result *int){
+    if root == nil{
+        return
+    }
+    if root.Val >= low && root.Val<=high{
+            *result+=root.Val
+    } 
+    helper(root.Left,low,high,result)
+    helper(root.Right,low,high,result)
 }
