@@ -7,23 +7,22 @@
  * }
  */
 func searchBST(root *TreeNode, val int) *TreeNode {
-    nodes := []*TreeNode{}
-    
-    nodes = append(nodes,root)
-    
-    for len(nodes) != 0{
-        node := nodes[0]
-        nodes = nodes[1:]
-        if node.Val == val{
-            return node     
-        }
-        if node.Left != nil{
-            nodes = append(nodes,node.Left)
-        }
-        if node.Right != nil{
-            nodes = append(nodes,node.Right)
-        }
+   return helper(root,val)
+}
+
+func helper(root *TreeNode,val int) *TreeNode{
+    if root == nil{
+        return nil
     }
-    return nil 
+    if root.Val == val{
+        return root
+    }
+   if x := helper(root.Left,val); x != nil{
+        return x
+    }
+    if x:= helper (root.Right,val); x != nil{
+        return x
+    }
+    return nil
 }
 
