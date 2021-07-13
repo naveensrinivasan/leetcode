@@ -1,18 +1,25 @@
 func isIsomorphic(s string, t string) bool {
-    m := make(map[int32]int32)
-	for i, i2 := range s {
-		if value, ok := m[i2]; ok {
-			if value != rune(t[i]) {
-				return false
-			}
-			continue
-		}
-		for _, i4 := range m {
-			if i4 == rune(t[i]) {
-				return false
-			}
-		}
-		m[i2] = rune(t[i])
-	}
-	return true
+    if len(s) != len(t){
+        return false
+    }
+    m := make(map[byte]byte)
+    m2 := make(map[byte]byte)
+    for i:=0;i<len(s);i++{
+        if v,ok:=m[s[i]];!ok{
+            m[s[i]] = t[i]
+        }else{
+            if v != t[i]{
+                return false
+            }
+        }
+        if v,ok:=m2[t[i]];!ok{
+            m2[t[i]] = s[i]
+        }else{
+            if v != s[i]{
+                return false
+            }
+        }
+    }
+      
+    return true
 }
