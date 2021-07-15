@@ -12,9 +12,7 @@ func inorderTraversal(root *TreeNode) []int {
     return g
 }
 func helper(root *TreeNode,result *[]int){
-    if root== nil{
-        return
-    }
+    if root == nil{return}
     helper(root.Right,result)
     *result = append([]int{root.Val},*result...)
     helper(root.Left,result)
