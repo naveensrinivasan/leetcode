@@ -7,36 +7,34 @@ import "strconv"
  *     Right *TreeNode
  * }
  */
+type F struct{
+   R *TreeNode
+   stack string
+}
+
 func binaryTreePaths(root *TreeNode) []string {
-    type F struct{
-       R *TreeNode
-       stack string
-    }
-    stack :=[]F{}
-    stack = append(stack,F{R:root})
     result := []string{}
-    for len(stack) != 0{
-        pop := stack[0] 
-        stack = stack[1:]
-        
-        arrow := ""
-        if len(pop.stack) != 0{
-            arrow = "->"
-        }
-        if pop.R.Left == nil && pop.R.Right == nil{
-            result = append(result,pop.stack + arrow+ strconv.Itoa(pop.R.Val))
-            continue
-        }
-        
-        if pop.R.Right != nil{
-            stack = append(stack,F{pop.R.Right,pop.stack + arrow+ strconv.Itoa(pop.R.Val)})     
-        }
-        if pop.R.Left != nil{
-            stack = append(stack,F{pop.R.Left,pop.stack + arrow +strconv.Itoa(pop.R.Val)})     
-        }
+    return helper(F{root,""},result)
+}
+
+func helper(pop F,result []string)[]string{
+    
+    arrow := ""
+    if len(pop.stack) != 0{
+        arrow = "->"
     }
     
-    return result
+    if pop.R.Left == nil && pop.R.Right == nil{
+       return append(result,pop.stack + arrow+ strconv.Itoa(pop.R.Val))
+    }
     
+    if pop.R.Right != nil{
+        result = helper(F{pop.R.Right,pop.stack + arrow+ strconv.Itoa(pop.R.Val)},result)     
+    }
+    
+    if pop.R.Left != nil{
+        result = helper(F{pop.R.Left,pop.stack + arrow+ strconv.Itoa(pop.R.Val)},result)     
+    }
+    return result
     
 }
