@@ -18,5 +18,5 @@ func helper(root *TreeNode,min,max *int )bool{
     }else if max != nil && root.Val >=*max{
         return false
     }
-    return helper(root.Right,&(root.Val),max) && helper(root.Left,min,&(root.Val))
+    return  helper(root.Left,min,&(root.Val))  && helper(root.Right,&(root.Val),max)
 }
