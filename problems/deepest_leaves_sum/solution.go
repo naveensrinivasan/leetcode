@@ -29,8 +29,10 @@ func deepestLeavesSum(root *TreeNode) int {
 }
 func helper(root *TreeNode,l int,s *[]F)[]F{
     l += 1
-    f1 := F{V:root.Val,L:l,}
-    *s = append(*s,f1)
+    if root.Left == nil && root.Right == nil{
+        f1 := F{V:root.Val,L:l,}
+        *s = append(*s,f1)
+    }
     
     if root.Left != nil{
         *s =helper(root.Left,l,s)
