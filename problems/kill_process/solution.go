@@ -11,7 +11,6 @@ func killProcess(pid []int, ppid []int, kill int) []int {
             m[ppid[i]] =v
         }
     }
-    fmt.Println(m)
     stack :=m[kill]
     result := []int{kill}
     for {
