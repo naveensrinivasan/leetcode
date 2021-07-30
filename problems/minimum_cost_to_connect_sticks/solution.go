@@ -1,136 +1,34 @@
 func connectSticks(sticks []int) int {
-    minHeap := newMinHeap(len(sticks))
-    for i := 0; i < len(sticks); i++ {
-        minHeap.insert(sticks[i])
-    }
-    minHeap.buildMinHeap()
-   
-    result := []int{}
-    for minHeap.Length() >1  {
-        x:= minHeap.remove()
-        y:= minHeap.remove()
-        sum := x+y 
-        result = append(result,sum)
-        minHeap.insert(sum)
-    }
+  minHeap := &MinHeap{}
+	for _, i := range sticks {
+		heap.Push(minHeap, i)
+	}
+    
     total :=0
-    for _, item := range result {
-        total += item
+    
+    for minHeap.Len() >1  {
+        x:= heap.Pop(minHeap)
+        y:= heap.Pop(minHeap)
+        total += x.(int)+ y.(int)
+        heap.Push(minHeap,x.(int)+y.(int))
     }
-    fmt.Println(result,minHeap.remove())
     return total
 }
+type MinHeap []int
 
+func (h MinHeap) Len() int           { return len(h) }
+func (h MinHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h MinHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h MinHeap) Peek() int          { return h[0] }
 
-
-type minheap struct {
-    heapArray []int
-    size      int
-    maxsize   int
+func (h *MinHeap) Push(x interface{}) {
+	*h = append(*h, x.(int))
 }
 
-func newMinHeap(maxsize int) *minheap {
-    minheap := &minheap{
-        heapArray: []int{},
-        size:      0,
-        maxsize:   maxsize,
-    }
-    return minheap
-}
-
-func (m *minheap) leaf(index int) bool {
-    if index >= (m.size/2) && index <= m.size {
-        return true
-    }
-    return false
-}
-
-func (m *minheap) parent(index int) int {
-    return (index - 1) / 2
-}
-
-func (m *minheap) leftchild(index int) int {
-    return 2*index + 1
-}
-
-func (m *minheap) rightchild(index int) int {
-    return 2*index + 2
-}
-
-func (m *minheap) insert(item int) error {
-    if m.size >= m.maxsize {
-        return fmt.Errorf("Heal is ful")
-    }
-    m.heapArray = append(m.heapArray, item)
-    m.size++
-    m.upHeapify(m.size - 1)
-    return nil
-}
-
-func (m *minheap) swap(first, second int) {
-    temp := m.heapArray[first]
-    m.heapArray[first] = m.heapArray[second]
-    m.heapArray[second] = temp
-}
-
-func (m *minheap) upHeapify(index int) {
-    for m.heapArray[index] < m.heapArray[m.parent(index)] {
-        m.swap(index, m.parent(index))
-        index = m.parent(index)
-    }
-}
-
-func (m *minheap) downHeapify(current int) {
-    if m.leaf(current) {
-        return
-    }
-    smallest := current
-    leftChildIndex := m.leftchild(current)
-    rightRightIndex := m.rightchild(current)
-    //If current is smallest then return
-    if leftChildIndex < m.size && m.heapArray[leftChildIndex] < m.heapArray[smallest] {
-        smallest = leftChildIndex
-    }
-    if rightRightIndex < m.size && m.heapArray[rightRightIndex] < m.heapArray[smallest] {
-        smallest = rightRightIndex
-    }
-    if smallest != current {
-        m.swap(current, smallest)
-        m.downHeapify(smallest)
-    }
-    return
-}
-func (m *minheap) buildMinHeap() {
-    for index := ((m.size / 2) - 1); index >= 0; index-- {
-        m.downHeapify(index)
-    }
-}
-
-func (m *minheap) Length()int{
-    return m.size
-}
-func (m *minheap) remove() int {
-    top := m.heapArray[0]
-    m.heapArray[0] = m.heapArray[m.size-1]
-    m.heapArray = m.heapArray[:(m.size)-1]
-    m.size--
-    m.downHeapify(0)
-    return top
-}
-
-func main1() {
-    inputArray := []int{6, 5, 3, 7, 2, 8,100}
-    minHeap := newMinHeap(len(inputArray))
-    for i := 0; i < len(inputArray); i++ {
-        minHeap.insert(inputArray[i])
-    }
-    minHeap.buildMinHeap()
-    for i := 0; i < len(inputArray); i++ {
-        fmt.Println(minHeap.remove())
-        if i%2==0{
-          minHeap.insert(1)
-          //minHeap.buildMinHeap()
-        }
-    }
-    
+func (h *MinHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
 }
