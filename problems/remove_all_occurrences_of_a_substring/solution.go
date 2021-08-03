@@ -4,10 +4,10 @@ func removeOccurrences(s string, part string) string {
         return s
     }
     result := s[:pos] + s[pos+len(part):]
-    if result == s{
-        return result
-    }else{
+    
+    if result != s{
         result = removeOccurrences(result,part)  
     }
+    
     return result
 }
